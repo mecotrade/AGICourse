@@ -104,7 +104,7 @@ class ProgressIndicator:
             if n == 0:
                 ax[n].set_title(f'Training time: {datetime.datetime.now() - self.init_ts}')
             # data range
-            v_min, v_max = (min(vals + [0]), max(vals + [0])) if self.yzero else min(vals)*(1 - 1e-6), max(vals)*(1 + 1e-6)
+            v_min, v_max = (min(vals + [0]), max(vals + [0])) if self.yzero else (min(vals)*(1 - 1e-6), max(vals)*(1 + 1e-6))
             v_range = v_max - v_min
             # plot data
             ax[n].set_xlim(0, self.target)
@@ -124,7 +124,7 @@ class ProgressIndicator:
             plt.grid(True)
             plt.show()
         
-    def update(self, step, values, scatter):
+    def update(self, step, values, scatter=None):
         # update data accumulator
         self.steps.append(step)        
         for label, val in values.items():
